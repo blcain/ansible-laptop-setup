@@ -1,0 +1,31 @@
+---
+# Playbook to setup my laptop
+
+- hosts: all
+  user: root
+  roles:
+    - role: workstation
+    - role: geerlingguy.nodejs
+      tags:
+        - nodejs
+      nodejs_version: 6.x
+      nodejs_install_npm_user: cainbro
+      nodejs_npm_global_packages:
+        - name: grunt-cli
+        - name: grunt-init
+        - name: gulp-cli
+        - name: npm-check-updates
+        - name: typescript
+        - name: ts-node
+        - name: typings
+        - name: yo
+        - name: browsersync
+        - name: karma
+        - name: karma-cli
+        - name: angular/cli
+    - role: gantsign.java
+      tags:
+        - java
+      java_version: 8u121
+      java_license_declaration: 'I accept the "Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX" under the terms at http://www.oracle.com/technetwork/java/javase/terms/license/index.html'
+

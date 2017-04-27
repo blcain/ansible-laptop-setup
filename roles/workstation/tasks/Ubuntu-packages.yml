@@ -1,0 +1,8 @@
+---
+- name: install Ubuntu packages
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - network-manager-vpnc
+    - network-manager-openvpn

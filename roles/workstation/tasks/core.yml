@@ -1,0 +1,52 @@
+---
+#- name: defined var NetworkManager-vpnc (Fedora)
+# - name hdefine vars
+#   vars:
+#     nmvpncpkg:NetworkManager-vpnc
+#     when: ansible_distribution == "Fedora"
+#   
+#     nmvpncpkg=network-manager-vpnc
+#     when: ansible_distribution == "Ubuntu"
+
+#- name: defined var NetworkManager-openvpn (Fedora)
+#  nmopenvpnpkg:NetworkManager-openvpn
+#  when: ansible_distribution == "Fedora"
+# 
+# - name: defined var NetworkManager-vpnc (Ubuntu)
+#  
+#- name: defined var NetworkManager-vpnc (Ubuntu)
+#  nmopenvpnpkg=network-manager-openvpn
+#  when: ansible_distribution == "Ubuntu"
+
+- name: install default packages
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - git
+    - zsh
+    - vim
+    - git-extras
+    - zip
+    - bzip2
+    - fontconfig
+    - curl
+    - wget
+    - language-pack-en
+    - expect
+    - keepassx
+ #   - {{nmvpncpkg}}
+ #   - {{nmopenvpnpkg}}
+   # - network-manager-vpnc
+   #   when: ansible_os_family == 'Debian'
+    - tmux
+    - tmuxinator
+    - mosh
+    - terminator
+    - glances
+    - dos2unix
+    - multitail
+    - tree
+
+#- name: install new
+- include: "roles/workstation/tasks/{{ansible_distribution}}-packages.yml" 

@@ -1,0 +1,6 @@
+---
+# setup Core features of workstation
+
+- include: core.yml
+- include: dotfiles.yml
+#- include: devtools.yml
