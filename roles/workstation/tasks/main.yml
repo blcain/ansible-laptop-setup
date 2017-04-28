@@ -3,4 +3,6 @@
 
 - include: core.yml
 - include: dotfiles.yml
+- include: visual-studio-code.yml
+- include: atom.yml
 #- include: devtools.yml

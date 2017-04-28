@@ -5,27 +5,202 @@
   user: root
   roles:
     - role: workstation
-    - role: geerlingguy.nodejs
-      tags:
-        - nodejs
-      nodejs_version: 6.x
-      nodejs_install_npm_user: cainbro
-      nodejs_npm_global_packages:
-        - name: grunt-cli
-        - name: grunt-init
-        - name: gulp-cli
-        - name: npm-check-updates
-        - name: typescript
-        - name: ts-node
-        - name: typings
-        - name: yo
-        - name: browsersync
-        - name: karma
-        - name: karma-cli
-        - name: angular/cli
+    - role: kurron.virtualbox
+#    - role: geerlingguy.repo-epel
+#      when: ansible_os_family == 'RedHat'
+#    - role: geerlingguy.nodejs
+#      tags:
+#        - nodejs
+#      nodejs_version: 6.x
+#      nodejs_install_npm_user: cainbro
+#      nodejs_npm_global_packages:
+#        - name: grunt-cli
+#        - name: grunt-init
+#        - name: gulp-cli
+#        - name: npm-check-updates
+#        - name: typescript
+#        - name: ts-node
+#        - name: typings
+#        - name: yo
+#        - name: browsersync
+#        - name: karma
+#        - name: karma-cli
+#        - name: angular/cli
     - role: gantsign.java
       tags:
         - java
       java_version: 8u121
       java_license_declaration: 'I accept the "Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX" under the terms at http://www.oracle.com/technetwork/java/javase/terms/license/index.html'
 
+# Install Google Chrome web broswer
+    - role: cmprescott.chrome
+      tags:
+        - gui
+        - chrome
+
+# Install Docker
+#    - role: angstwad.docker_ubuntu
+#      tags:
+#        - docker
+#      docker_group_members:
+#        - cainbro
+
+    # Install Kubernetes
+#    - role: gantsign.kubernetes
+#      tags:
+#        - kubernetes
+#        - docker
+#      kubernetes_node_type: admin
+
+ # Install Maven
+    - role: gantsign.maven
+      tags:
+        - java
+        - maven
+      maven_version: '3.5.0'
+
+    # Install Postman HTTP tool
+    - role: gantsign.postman
+      tags:
+        - gui
+        - postman
+
+    # Install Atom editor
+    #- role: gantsign.atom
+    #  when: ansible_os_family == 'Debian'
+    #  tags:
+    #    - gui
+    #    - atom
+    #  users:
+    #    - username: cainbro
+    #      atom_packages:
+    #        - editorconfig
+    #        - minimap
+    #        - linter
+    #        - atom-beautify
+    #        - file-icons
+    #      atom_config:
+    #        "*":
+    #          core:
+    #            projectHome: "/home/cainbro/workspace"
+    #          editor:
+    #            showIndentGuide: true
+    #            showInvisibles: true
+
+    # Install Visual Studio Code editor
+    #- role: gantsign.visual-studio-code
+    #  tags:
+    #    - gui
+    #    - vscode
+    #  users:
+    #    - username: cainbro
+    #      visual_studio_code_extensions:
+    #        - EditorConfig.EditorConfig
+    #        - streetsidesoftware.code-spell-checker
+    #        - wholroyd.jinja
+    #        - donjayamanne.python
+    #        - rebornix.Ruby
+    #      visual_studio_code_settings: {
+    #        "editor.rulers": [80, 100, 120],
+    #        "editor.renderWhitespace": true,
+    #        "files.associations": {
+    #          "Vagrantfile": "ruby",
+    #          ".vagrantuser": "yaml",
+    #          ".vagrantuser.example": "yaml"
+    #        }
+    #      }
+
+ # Install and configure IntelliJ IDEA IDE
+    - role: gantsign.intellij
+      tags:
+        - java
+        - gui
+        - intellij
+      intellij_edition: community
+      intellij_jdk_home: "{{ ansible_local.java.general.home }}"
+      intellij_default_maven_home: "{{ ansible_local.maven.general.home }}"
+      users:
+        - username: cainbro
+          intellij_jdks:
+            - name: '1.8'
+              home: "{{ ansible_local.java.general.home }}"
+          intellij_default_jdk: '1.8'
+          intellij_disabled_plugins:
+            - CVS
+            - com.intellij.uiDesigner
+            - org.jetbrains.android
+            - TestNG-J
+            - hg4idea
+            - Subversion
+            - AntSupport
+            - DevKit
+            - ClearcasePlugin
+            - CloudBees
+            - CloudFoundry
+            - Geronimo
+            - GlassFish
+            - Heroku
+            - JBoss
+            - JSR45Plugin
+            - OpenShift
+            - Resin
+            - StrutsAssistant
+            - WebSphere
+            - Weblogic
+            - com.intellij.appengine
+            - com.intellij.aspectj
+            - com.intellij.dmserver
+            - com.intellij.flex
+            - com.intellij.gwt
+            - com.intellij.seam
+            - com.intellij.seam.pageflow
+            - com.intellij.seam.pages
+            - com.intellij.struts2
+            - com.intellij.tapestry
+            - com.intellij.vaadin
+            - com.intellij.velocity
+            - org.coffeescript
+            - org.intellij.grails
+            - org.jetbrains.plugins.haml
+            - org.jetbrains.plugins.stylus
+            - TFS
+            - PerforceDirectPlugin
+
+    # Add items to DockbarX launcher
+    - role: pin-to-launcher
+      tags:
+        - gui
+      pin_to_launcher: unity
+      pin_to_launcher_favorites:
+        - application: ubiquity.desktop
+          when_desktop: unity
+        - application: terminator.desktop
+        - application: org.gnome.Nautilus.desktop
+          when_desktop: unity
+        - application: Thunar.desktop
+        - application: google-chrome.desktop
+        - application: Postman.desktop
+        - application: atom.desktop
+        - application: code.desktop
+        - application: "{{ ansible_local.intellij.general.desktop_filename if (ansible_local is defined and ansible_local.intellij is defined) else omit }}"
+        - application: ubuntu-software-center.desktop
+          when_desktop: unity
+        - application: unity-control-center.desktop
+          when_desktop: unity
+        - unity: running-apps
+        - unity: expo-icon
+        - unity: devices
+
+# Install oh-my-zsh shell enhancements
+    - role: gantsign.oh-my-zsh
+      tags:
+        - oh-my-zsh
+      users:
+        - username: cainbro
+          oh_my_zsh:
+            theme: robbyrussell
+            plugins:
+              - command-not-found
+              - docker
+              - git
+              - mvn

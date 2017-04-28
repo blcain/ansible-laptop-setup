@@ -32,7 +32,7 @@
     - fontconfig
     - curl
     - wget
-    - language-pack-en
+#    - language-pack-en
     - expect
     - keepassx
  #   - {{nmvpncpkg}}
@@ -47,6 +47,15 @@
     - dos2unix
     - multitail
     - tree
+    - gcc-c++
+    - make
+    - libselinux-python
+    - gnome-tweak-tool
+    - meld
+    - vagrant
+   # - virtualbox
+    - gimp
+    - deja-dup
 
 #- name: install new
 - include: "roles/workstation/tasks/{{ansible_distribution}}-packages.yml" 
