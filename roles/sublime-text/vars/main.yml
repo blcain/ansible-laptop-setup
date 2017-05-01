@@ -1,0 +1,12 @@
+---
+sublimetext_arch: "amd64"
+sublimetext_tmp_dir: "/tmp"
+
+# --- Debian vars ---
+sublimetext_url_deb: "{{sublimetext_dl_source}}/sublime-text_build-{{sublimetext_build}}_{{sublimetext_arch}}.deb"
+sublimetext_tmp_deb: "{{sublimetext_tmp_dir}}/sublimetext.deb"
+
+# --- RedHat vars ---
+sublimetext_url_rh: "{{sublimetext_dl_source}}/sublime_text_3_build_{{sublimetext_build}}_x64.tar.bz2"
+sublimetext_tmp_rh: "{{sublimetext_tmp_dir}}/sublime.tar.bz2"
+sublimetext_install_prefix: "/opt"

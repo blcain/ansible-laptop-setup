@@ -1,0 +1,38 @@
+---
+- name: install libglib2.0-bin
+  become: yes
+  package:
+    name: glib2
+    state: present
+
+- name: write unity launcher config
+  become: yes
+  template:
+    src: launcher-gnome-shell.gschema.override.j2
+    dest: "{{ pin_to_launcher_glib_schemas_directory }}/20_ansible_launcher.gschema.override"
+    owner: root
+    group: root
+    mode: 'u=rw,go=r'
+  register: launcher_config
+- shell: echo {{ item }}
+  with_items: "{{pin_to_launcher_favorites}}"
+
+- debug:
+    msg: "array join lines- [{{pin_to_launcher_favorites|join(', ')}}]"
+
+- debug: msg="variable - $pin_to_launcher_favorites"
+- debug: msg="variable - {{pin_to_launcher_favorites}}"
+- debug:
+    msg: "gsettings set org.gnome.shell favorite-apps {{item}}"
+  with_items: "{{pin_to_launcher_favorites}}"
+
+- name: apply gnome-shell changes
+  tags:
+    # Suppress warning: [ANSIBLE0016] Tasks that run when changed should likely be handlers
+    # Since the command is invoked with an argument that is role specific it
+    # doesn't make sense to use a handler, which are global to the playbook.
+    - skip_ansible_lint
+  become: yes
+  command: "/usr/bin/gsettings set org.gnome.shell favorite-apps {{ pin_to_launcher_favorites }}"
+  when: launcher_config.changed
+

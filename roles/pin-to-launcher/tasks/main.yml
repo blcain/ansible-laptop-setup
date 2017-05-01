@@ -3,10 +3,13 @@
 - name: assert launcher in supported list
   assert:
     that:
-      - "pin_to_launcher in ('dockbarx', 'unity')"
+      - "pin_to_launcher in ('dockbarx', 'unity', 'gnome-shell')"
 
 - include: dockbarx.yml
   when: pin_to_launcher == 'dockbarx'
 
 - include: unity.yml
   when: pin_to_launcher == 'unity'
+
+- include: gnome-shell.yml
+  when: pin_to_launcher == 'gnome-shell'

@@ -1,0 +1,29 @@
+---
+# Playbook to setup my laptop
+
+- hosts: all
+  user: root
+  vars:
+    launcher_favorites:
+      - terminator.desktop
+      - Thunar.desktop
+
+  roles:
+#    - role: workstation
+
+    # Add items to DockbarX launcher
+    - role: pin-to-launcher
+      tags:
+        - gui
+      pin_to_launcher: gnome-shell
+      pin_to_launcher_favorites:
+        - terminator.desktop
+        - Thunar.desktop
+        - google-chrome.desktop
+        - Postman.desktop
+        - atom.desktop
+        - code.desktop
+        - virtualbox.desktop
+        - "{{ ansible_local.intellij.general.desktop_filename if (ansible_local is defined and ansible_local.intellij is defined) else omit }}"
+      
+

@@ -1,0 +1,28 @@
+
+- name: Move desktop file to usr/share
+  stat: path="{{sublimetext_install_prefix}}/sublime_text/sublime_text"
+  register: sublime_stat
+
+- debug:
+    msg: "URL {{sublimetext_url_rh}}"
+
+- name: Download sublime text
+  get_url: url={{ sublimetext_url_rh }} dest={{sublimetext_tmp_rh}}
+  tags: ["packages","sublimetext"]
+  when: sublime_stat.stat.exists == False
+
+- name: "Unpack Sublime Text"
+  unarchive:
+    src: "{{sublimetext_tmp_rh}}"
+    dest: "{{sublimetext_install_prefix}}"
+  when: sublime_stat.stat.exists == False
+
+- file:
+    src: "{{sublimetext_install_prefix}}/sublime_text_3"
+    dest: "{{sublimetext_install_prefix}}/sublime_text"
+    state: link
+  when: sublime_stat.stat.exists == False
+
+- name: Move Submlime Text Desktop file
+  command: mv {{sublimetext_install_prefix}}/sublime_text/sublime_text.desktop /usr/share/applications
+  when: sublime_stat.stat.exists == False

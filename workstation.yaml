@@ -3,12 +3,19 @@
 
 - hosts: all
   user: root
+  vars:
+    sublimetext_dl_source: "https://download.sublimetext.com"
+    sublimetext_build: 3126
+    webstorm_downloads_path: /tmp/ansible/webstorm/downloads
+    webstorm_version: 2017.1.2
+    webstorm_install_prefix: /opt
+
   roles:
     - role: workstation
     - role: kurron.virtualbox
 #    - role: geerlingguy.repo-epel
 #      when: ansible_os_family == 'RedHat'
-#    - role: geerlingguy.nodejs
+#    - role: ansible-role-nodejs-master
 #      tags:
 #        - nodejs
 #      nodejs_version: 6.x
@@ -170,26 +177,16 @@
     - role: pin-to-launcher
       tags:
         - gui
-      pin_to_launcher: unity
+      pin_to_launcher: gnome-shell
       pin_to_launcher_favorites:
-        - application: ubiquity.desktop
-          when_desktop: unity
-        - application: terminator.desktop
-        - application: org.gnome.Nautilus.desktop
-          when_desktop: unity
-        - application: Thunar.desktop
-        - application: google-chrome.desktop
-        - application: Postman.desktop
-        - application: atom.desktop
-        - application: code.desktop
-        - application: "{{ ansible_local.intellij.general.desktop_filename if (ansible_local is defined and ansible_local.intellij is defined) else omit }}"
-        - application: ubuntu-software-center.desktop
-          when_desktop: unity
-        - application: unity-control-center.desktop
-          when_desktop: unity
-        - unity: running-apps
-        - unity: expo-icon
-        - unity: devices
+        - terminator.desktop
+        - Thunar.desktop
+        - google-chrome.desktop
+        - Postman.desktop
+        - atom.desktop
+        - code.desktop
+        - virtualbox.desktop
+        - "{{ ansible_local.intellij.general.desktop_filename if (ansible_local is defined and ansible_local.intellij is defined) else omit }}"
 
 # Install oh-my-zsh shell enhancements
     - role: gantsign.oh-my-zsh
@@ -204,3 +201,8 @@
               - docker
               - git
               - mvn
+
+    # Install WebEx
+    - role: webex
+      when: ansible_os_family == 'RedHat'
+    - role: sublime-text

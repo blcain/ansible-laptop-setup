@@ -1,0 +1,36 @@
+# tasks file for webstorm
+---
+- name: create Webstorm download directory
+  file:
+    path: "{{ webstorm_downloads_path }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  tags:
+    - configuration
+    - webstorm
+    - webstorm-download
+
+- name: Download WS
+  get_url:
+    url: "https://download.jetbrains.com/webstorm/WebStorm-{{ webstorm_version }}.tar.gz"
+    dest: "{{ webstorm_downloads_path }}/WebStorm-{{ webstorm_version }}.tar.gz"
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - configuration
+    - webstorm
+    - webstorm-downloads
+
+- name: Install WS
+  unarchive:
+    src: "{{ webstorm_downloads_path }}/WebStorm-{{ webstorm_version }}.tar.gz"
+    dest: "{{ webstorm_install_prefix }}"
+    creates: "{{ webstorm_install_prefix }}/webstorm-{{ webstorm_version }}"
+    copy: false
+  tags:
+    - configuration
+    - webstorm
+    - webstorm-install

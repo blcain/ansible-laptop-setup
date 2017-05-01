@@ -1,0 +1,10 @@
+---
+# Playbook to setup my laptop
+
+- hosts: all
+  user: root
+  vars:
+    sublimetext_dl_source: "https://download.sublimetext.com"
+    sublimetext_build: 3126
+  roles:
+    - role: sublime-text

@@ -1,0 +1,19 @@
+# {{ ansible_managed }}
+
+{% set first_fav = True %}
+#[com.canonical.Unity.Launcher]#
+[org.gnome.shell]
+{# Using comments to suppress whitespace #}
+favorite-apps = [{#
+#}{% for favourite in pin_to_launcher_favorites %}{#
+
+    #}{% if favourite is defined and favourite.application not in ('', None, omit) %}{#
+        #}{% if not favourite.when_desktop is defined or favourite.when_desktop == 'gnome-shell' %}{#
+            #}{% if not first_fav %}, {% endif %}{% set first_fav = False %}{#
+            #}"{{ favourite }}"{#
+        #}{% endif %}{#
+    #}{% endif %}{#
+
+    
+
+#}{% endfor %}]

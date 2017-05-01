@@ -1,0 +1,11 @@
+
+- dnf: pkg={{ item }} state=present
+  with_items:
+    - icedtea-web
+    - java-1.8.0-openjdk
+    - pangox-compat.i686
+    - libXmu.i686
+    - libpng12.i686
+    - mesa-libEGL.i686
+    - gtk2.i686
+    - libcanberra-gtk2.i686
