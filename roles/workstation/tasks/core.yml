@@ -4,16 +4,16 @@
 #   vars:
 #     nmvpncpkg:NetworkManager-vpnc
 #     when: ansible_distribution == "Fedora"
-#   
+#
 #     nmvpncpkg=network-manager-vpnc
 #     when: ansible_distribution == "Ubuntu"
 
 #- name: defined var NetworkManager-openvpn (Fedora)
 #  nmopenvpnpkg:NetworkManager-openvpn
 #  when: ansible_distribution == "Fedora"
-# 
+#
 # - name: defined var NetworkManager-vpnc (Ubuntu)
-#  
+#
 #- name: defined var NetworkManager-vpnc (Ubuntu)
 #  nmopenvpnpkg=network-manager-openvpn
 #  when: ansible_distribution == "Ubuntu"
@@ -58,4 +58,5 @@
     - deja-dup
 
 #- name: install new
-- include: "roles/workstation/tasks/{{ansible_distribution}}-packages.yml" 
+- include: "roles/workstation/tasks/{{ansible_distribution}}-packages.yml"
+- include: "charles-proxy.yml"

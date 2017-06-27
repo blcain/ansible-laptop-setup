@@ -1,0 +1,15 @@
+---
+- name: Install Charles Proxy Repo
+  yum_repository:
+    name: charlesproxy-repo
+    description: Charles Proxy YUM repo
+    file: external_repos
+    baseurl: https://www.charlesproxy.com/packages/yum
+    gpgkey: https://www.charlesproxy.com/packages/yum/PublicKey
+    gpgcheck: yes
+  when: ansible_os_family=="RedHat"
+
+- name: Install Charles Proxy
+  package:
+    name: charles-proxy
+    state: present
