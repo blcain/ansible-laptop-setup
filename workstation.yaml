@@ -188,6 +188,19 @@
 #        - virtualbox.desktop
 #        - "{{ ansible_local.intellij.general.desktop_filename if (ansible_local is defined and ansible_local.intellij is defined) else omit }}"
 
+# Install Powerline theme - Powerlevel9K
+#
+   - name: clone oh-my-zsh for users
+     tags:
+       # Suppress warning: [ANSIBLE0006] git used in place of git module
+       # Git module doesn't allow us to set `core.autocrlf=input`.
+       - skip_ansible_lint
+     become: yes
+     command: 'git clone -c core.autocrlf=input --depth=1 https://github.com/bhilburn/powerlevel9k.git ~{{ item.username }}/.oh-my-zsh/custom/themes/powerlevel9k'
+     args:
+       creates: '~{{ item.username }}/.oh-my-zsh'
+     with_items: '{{ users }}'
+
 # Install oh-my-zsh shell enhancements
     - role: gantsign.oh-my-zsh
       tags:
@@ -195,12 +208,14 @@
       users:
         - username: cainbro
           oh_my_zsh:
-            theme: robbyrussell
+            theme: powerlevel9k/powerlevel9k
             plugins:
               - command-not-found
               - docker
               - git
               - mvn
+              - npm
+              - tmux
 
     # Install WebEx
     - role: webex
