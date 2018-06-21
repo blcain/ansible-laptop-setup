@@ -1,0 +1,44 @@
+---
+# apps to install
+general:
+  local_home: "{{ lookup('env', 'HOME') }}"
+
+applications:
+  - git
+  - git-extras
+  - httpie
+  - curl
+  - wget
+  - zsh
+  - kubectl
+  - kubernetes-helm
+  - ssh-copy-id
+  - node
+  - nvm
+  - openssl
+
+
+# homebrew cask apps
+cask_apps:
+  - google-chrome
+  - firefox
+  - atom
+  - sublime-text
+  - slack
+  - iterm2
+  - docker
+  - vagrant
+  - virtualbox
+  - spotify
+  - alfred
+  - minikube
+  - dropbox
+  - transmit
+  - licecap
+  - evernote
+  - visual-studio-code
+  - webstorm
+  - intellij-idea-ce
+  - postman
+  - java
+  - keepassx
