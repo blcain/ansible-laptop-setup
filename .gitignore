@@ -1,2 +1,4 @@
 ##### Ansible #####
 *.retry
+.history/
+.idea/
