@@ -1,10 +1,14 @@
 ---
-- name Clone dotfiles repo
+#- name: Clone dotfiles repo
+#  git:
+#    repo: "{{ dotfiles_repo }}"
+#    dest: "{{ dotfiles }}"
+#  become: no
+- name:
   git:
     repo: "{{ dotfiles_repo }}"
-    dest: "{{ dotfiles }}"
-  become: no
-
+    dest: "{{ dotfiles_repo_dest }}"
+ 
 - name: Ensure all configured dotfiles are links.
   shell: "ls -F {{ dotfiles_home }}/{{ item }}"
   register: existing_dotfile_info
