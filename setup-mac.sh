@@ -20,7 +20,7 @@ if [ ! -d $installdir ]; then
    exit 1
 else
    cd $installdir
-   ansible-playbook -i ./hosts mac-os.yml --verbose
+   ansible-playbook -i ./hosts macos.yml --verbose
 fi        
 
 echo "Removing tmp installation dir"
