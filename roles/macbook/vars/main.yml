@@ -3,6 +3,16 @@
 general:
   local_home: "{{ lookup('env', 'HOME') }}"
 
+dotfiles_repo: "https://bcain@bitbucket.org/bcain/dotfiles.git"
+dotfiles_repo_dest: "~/git/dotfiles"
+dotfiles_home: "~"
+dotfiles_files:
+  - .bashrc
+  - .gitconfig
+  - .gitignore
+  - .zsh_favlist
+  - .zshrc
+  
 applications:
   - git
   - git-extras
@@ -42,3 +52,4 @@ cask_apps:
   - postman
   - java
   - keepassx
+  - microsoft-teams
