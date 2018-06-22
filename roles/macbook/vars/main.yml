@@ -30,6 +30,7 @@ applications:
   - tmux
 
 
+
 # homebrew cask apps
 cask_apps:
   - google-chrome
@@ -55,3 +56,4 @@ cask_apps:
   - java
   - keepassx
   - microsoft-teams
+  - kdiff3
