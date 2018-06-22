@@ -54,4 +54,4 @@ cask_apps:
   - java
   - keepassx
   - microsoft-teams
-  - p4merge
+  - kdiff3
