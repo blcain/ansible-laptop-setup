@@ -9,7 +9,7 @@
 - name: install powerlevel theme
   git:
     repo: https://github.com/bhilburn/powerlevel9k.git
-    dest: "{{ ohmyzsh_custom_path }}/themes/powerlevel9k"
+    dest: "{{ general.ohmyzsh_custom_path }}/themes/powerlevel9k"
 
 - name: install powerline font
   pip:

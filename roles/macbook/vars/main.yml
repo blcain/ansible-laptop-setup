@@ -60,3 +60,4 @@ cask_apps:
   - keepassx
   - microsoft-teams
   - kdiff3
+  - sourcetree
