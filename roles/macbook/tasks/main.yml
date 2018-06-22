@@ -3,3 +3,6 @@
 
 - name: dotfiles
   include: dotfiles.yml
+
+- name: install oh-my-zsh
+  include: oh-my-zsh.yml
