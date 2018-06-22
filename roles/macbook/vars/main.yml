@@ -26,6 +26,7 @@ applications:
   - node
   - nvm
   - openssl
+  
 
 
 # homebrew cask apps
@@ -53,3 +54,4 @@ cask_apps:
   - java
   - keepassx
   - microsoft-teams
+  - p4merge
