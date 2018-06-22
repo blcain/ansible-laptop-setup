@@ -1,5 +1,6 @@
 ---
 # apps to install
+username: bcain
 general:
   local_home: "{{ lookup('env', 'HOME') }}"
 
@@ -26,6 +27,7 @@ applications:
   - node
   - nvm
   - openssl
+  - tmux
 
 
 # homebrew cask apps
