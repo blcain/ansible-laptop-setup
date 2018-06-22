@@ -1,28 +1,22 @@
 ---
-# Install Powerline theme - Powerlevel9K
-#
-   - name: clone oh-my-zsh for users
-     tags:
-       # Suppress warning: [ANSIBLE0006] git used in place of git module
-       # Git module doesn't allow us to set `core.autocrlf=input`.
-       - skip_ansible_lint
-     become: yes
-     command: 'git clone -c core.autocrlf=input --depth=1 https://github.com/bhilburn/powerlevel9k.git ~{{ item.username }}/.oh-my-zsh/custom/themes/powerlevel9k'
-     args:
-       creates: '~{{ username }}/.oh-my-zsh'
 
-# Install oh-my-zsh shell enhancements
-    - role: gantsign.oh-my-zsh
-      tags:
-        - oh-my-zsh
-      users:
-        - username: {{ username }}
-          oh_my_zsh:
-            theme: powerlevel9k/powerlevel9k
-            plugins:
-              - command-not-found
-              - docker
-              - git
-              - mvn
-              - npm
-              - tmux
+#Install oh-my-zsh
+- name: install my-oh-zsh
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh.git
+    dest: "{{ general.local_home }}/.oh-my-zsh"
+
+- name: install powerlevel theme
+  git:
+    repo: https://github.com/bhilburn/powerlevel9k.git
+    dest: "{{ ohmyzsh_custom_path }}/themes/powerlevel9k"
+
+- name: install powerline font
+  pip:
+    name: powerline-status
+    extra_args: --user
+    
+#- name: create symlink to custom/themes
+#  file:
+#    src: "{{ ohmyzsh_custom_path }}//.oh-my-zsh_powerlevel_theme"
+#    dest: "{{ general.local_home  }}/themes/powerlevel9K"

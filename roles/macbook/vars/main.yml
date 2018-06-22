@@ -3,6 +3,7 @@
 username: bcain
 general:
   local_home: "{{ lookup('env', 'HOME') }}"
+  ohmyzsh_custom_path: "{{ lookup('env', 'HOME') }}/.zsh_custom"
 
 dotfiles_repo: "https://bcain@bitbucket.org/bcain/dotfiles.git"
 dotfiles_repo_dest: "~/git/dotfiles"
@@ -28,6 +29,8 @@ applications:
   - nvm
   - openssl
   - tmux
+  - coreutils
+  - python
 
 
 
