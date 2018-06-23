@@ -31,7 +31,8 @@ applications:
   - tmux
   - coreutils
   - python
-
+  - tree
+  - ack
 
 
 # homebrew cask apps
@@ -57,7 +58,17 @@ cask_apps:
   - intellij-idea-ce
   - postman
   - java
+  - java8
   - keepassx
   - microsoft-teams
   - kdiff3
   - sourcetree
+  - font-firacode-nerd-font
+  - font-firamono-nerd-font
+  - font-monofur-for-powerline
+  - font-menslo-nerd-font
+  - font-meslo-nerd-font
+  - font-meslo-for-powerline
+  - font-liberation-mono-for-powerline
+  - font-liberationmono-nerd-font
+

@@ -13,5 +13,13 @@
 
 - name: tap cask
   homebrew_tap:
-    tap: "homebrew/cask"
+    tap: "homebrew/cask" 
+
+- name: tap cask fonts
+  homebrew_tap:
+    tap: "homebrew/cask-fonts"
+
+- name: tap cask versions
+  homebrew_tap:
+    tap: "homebrew/cask-versions"
     
