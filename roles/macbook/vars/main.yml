@@ -38,6 +38,7 @@ applications:
 # homebrew cask apps
 cask_apps:
   - google-chrome
+  - google-backup-and-sync
   - firefox
   - atom
   - sublime-text
@@ -71,4 +72,5 @@ cask_apps:
   - font-meslo-for-powerline
   - font-liberation-mono-for-powerline
   - font-liberationmono-nerd-font
+  - spectacle
 
