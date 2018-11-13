@@ -33,6 +33,7 @@ applications:
   - python
   - tree
   - ack
+  - nginx
 
 
 # homebrew cask apps
