@@ -2,3 +2,4 @@
 *.retry
 .history/
 .idea/
+.DS_Store
