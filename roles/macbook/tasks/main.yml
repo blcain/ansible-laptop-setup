@@ -1,5 +1,5 @@
-- name: app installs
-  include: apps.yml
+#- name: app installs
+#  include: apps.yml
 
 - name: dotfiles
   include: dotfiles.yml
